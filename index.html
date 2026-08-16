@@ -493,4 +493,309 @@ function startGame(){
 
     currentQuestion = 0;
 
-    load
+    loadQuestions();
+
+    showScreen("questionScreen");
+
+}
+
+
+
+/* =========================
+   LOAD QUESTION
+========================= */
+
+function loadQuestions(){
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("questionNumber").innerText =
+        "QUESTION " + (currentQuestion + 1) + " OF 5";
+
+    document.getElementById("question").innerText =
+        q.question;
+
+    const options =
+        document.getElementById("options");
+
+    options.innerHTML = "";
+
+    document.getElementById("result").innerHTML = "";
+
+    q.options.forEach((option,index)=>{
+
+        const button =
+            document.createElement("button");
+
+        button.innerText = option;
+
+        button.onclick = function(){
+
+            checkAnswer(index);
+
+        };
+
+        options.appendChild(button);
+
+    });
+
+}
+
+
+
+/* =========================
+   CHECK ANSWER
+========================= */
+
+function checkAnswer(answer){
+
+    const q = questions[currentQuestion];
+
+    const result =
+        document.getElementById("result");
+
+    if(answer === q.correct){
+
+        result.innerHTML =
+        '<span class="correct">Correct! You remember. 🥹❤️</span>';
+
+        setTimeout(()=>{
+
+            showPhoto();
+
+        },800);
+
+    }else{
+
+        result.innerHTML =
+        '<span class="wrong">Awww... try again! 😂❤️</span>';
+
+    }
+
+}
+
+
+
+/* =========================
+   PHOTO REVEAL
+========================= */
+
+function showPhoto(){
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("photoTitle").innerText =
+        "You remembered! ❤️";
+
+    document.getElementById("photoCaption").innerText =
+        q.caption;
+
+    const photoBox =
+        document.getElementById("photoBox");
+
+    photoBox.innerHTML = "";
+
+    if(photos.length > 0){
+
+        let photo =
+            photos[currentPhotoIndex % photos.length];
+
+        const img =
+            document.createElement("img");
+
+        img.src = photo;
+
+        img.alt = "A special memory ❤️";
+
+        photoBox.appendChild(img);
+
+        currentPhotoIndex++;
+
+    }else{
+
+        photoBox.innerHTML =
+        "<p>Our memory is hiding right now... ❤️</p>";
+
+    }
+
+    showScreen("photoScreen");
+
+}
+
+
+
+/* =========================
+   NEXT QUESTION
+========================= */
+
+function nextQuestion(){
+
+    currentQuestion++;
+
+    if(currentQuestion >= questions.length){
+
+        showFinal();
+
+    }else{
+
+        loadQuestions();
+
+        showScreen("questionScreen");
+
+    }
+
+}
+
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+function showFinal(){
+
+    const finalPhoto =
+        document.getElementById("finalPhoto");
+
+    finalPhoto.innerHTML = "";
+
+    if(photos.length > 0){
+
+        const img =
+            document.createElement("img");
+
+        img.src =
+            photos[photos.length - 1];
+
+        img.alt =
+            "Our favourite memory ❤️";
+
+        finalPhoto.appendChild(img);
+
+    }
+
+    showScreen("finalScreen");
+
+    createConfetti();
+
+}
+
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+function createConfetti(){
+
+    const symbols = [
+        "❤️",
+        "💗",
+        "💕",
+        "✨",
+        "🥹",
+        "🎉"
+    ];
+
+    for(let i=0;i<45;i++){
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "confetti";
+
+        item.innerText =
+            symbols[
+                Math.floor(
+                    Math.random()*symbols.length
+                )
+            ];
+
+        item.style.left =
+            Math.random()*100 + "vw";
+
+        item.style.animationDelay =
+            Math.random()*2 + "s";
+
+        document.body.appendChild(item);
+
+        setTimeout(()=>{
+            item.remove();
+        },5000);
+
+    }
+
+}
+
+
+
+/* =========================
+   LOAD PHOTOS FROM GITHUB
+========================= */
+
+async function loadPhotos(){
+
+    const username =
+        "rakshana-hue";
+
+    const repository =
+        "Rohith-20th-birthday";
+
+    try{
+
+        const response =
+            await fetch(
+                `https://api.github.com/repos/${username}/${repository}/contents/`
+            );
+
+        if(!response.ok){
+            throw new Error("Unable to load repository");
+        }
+
+        const files =
+            await response.json();
+
+        const imageFiles =
+            files.filter(file => {
+
+                return file.type === "file" &&
+                /\.(jpg|jpeg|png|gif|webp)$/i
+                .test(file.name);
+
+            });
+
+        photos =
+            imageFiles.map(file => {
+
+                return file.download_url;
+
+            });
+
+        console.log(
+            "Photos loaded:",
+            photos.length
+        );
+
+    }catch(error){
+
+        console.log(
+            "Photo loading error:",
+            error
+        );
+
+        photos = [];
+
+    }
+
+}
+
+
+/* Start loading photos */
+
+loadPhotos();
+
+</script>
+
+</body>
+</html>
