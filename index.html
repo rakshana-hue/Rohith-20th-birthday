@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rohith's 20th Birthday ❤️</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#100812;
+  color:white;
+  text-align:center;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+.screen{
+  display:none;
+  min-height:100vh;
+  padding:35px 20px;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+.active{display:flex}
+
+h1{font-size:38px;margin:10px 0}
+h2{font-size:27px}
+p{font-size:17px;line-height:1.6}
+
+button{
+  border:0;
+  padding:14px 25px;
+  border-radius:30px;
+  background:#ff4f91;
+  color:white;
+  font-size:16px;
+  margin:10px;
+  box-shadow:0 5px 20px #ff4f9140;
+}
+
+button:active{transform:scale(.95)}
+
+.heart{
+  position:fixed;
+  font-size:30px;
+  cursor:pointer;
+  animation:float 3s linear forwards;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);opacity:1}
+  to{transform:translateY(-20vh);opacity:0}
+}
+
+.card{
+  background:#ffffff12;
+  border:1px solid #ffffff25;
+  border-radius:25px;
+  padding:25px;
+  max-width:420px;
+  width:100%;
+  backdrop-filter:blur(10px);
+}
+
+.quiz button{
+  display:block;
+  width:90%;
+  margin:12px auto;
+}
+
+.memory{
+  font-size:70px;
+  margin:20px;
+}
+
+.box{
+  display:inline-flex;
+  width:90px;
+  height:90px;
+  margin:10px;
+  background:#ff4f91;
+  border-radius:20px;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
+  cursor:pointer;
+}
+
+.number{
+  display:inline-flex;
+  width:55px;
+  height:55px;
+  margin:6px;
+  background:#ffffff18;
+  border-radius:50%;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+#message{
+  min-height:80px;
+  margin-top:20px;
+  font-size:19px;
+}
+
+.final{
+  background:radial-gradient(circle,#4d1538,#100812 65%);
+}
+
+.big{
+  font-size:70px;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.15)}
+}
+
+.small{opacity:.7;font-size:14px}
+</style>
+</head>
+
+<body>
+
+<!-- START -->
+<section id="start" class="screen active">
+  <div class="big">🎮</div>
+  <p class="small">PLAYER: ROHITH</p>
+  <h1>LEVEL 20</h1>
+  <p>Your birthday quest is ready...</p>
+  <p>Are you ready to unlock your surprises? ❤️</p>
+  <button onclick="go('level1')">START GAME 🎮</button>
+</section>
+
+
+<!-- LEVEL 1 -->
+<section id="level1" class="screen">
+  <div class="card">
+    <h2>LEVEL 1 ❤️</h2>
+    <p>Catch 5 hearts to unlock your next surprise!</p>
+    <p id="score">Hearts: 0 / 5</p>
+  </div>
+</section>
+
+
+<!-- LEVEL 2 -->
+<section id="level2" class="screen">
+  <div class="card quiz">
+    <h2>LEVEL 2 🧠</h2>
+    <p>Let's see how well you know me 😌❤️</p>
+    <p><b>What would I choose?</b></p>
+
+    <button onclick="wrong()">A random stranger 😂</button>
+    <button onclick="correct()">You ❤️</button>
+    <button onclick="wrong()">A million chocolates 🍫</button>
+
+    <div id="quizmsg"></div>
+  </div>
+</section>
+
+
+<!-- LEVEL 3 -->
+<section id="level3" class="screen">
+  <div class="card">
+    <h2>LEVEL 3 🧩</h2>
+    <p>Every relationship has memories...</p>
+    <div class="memory">📸❤️</div>
+    <p>Tap the memory to unlock it.</p>
+    <button onclick="memory()">UNLOCK MEMORY</button>
+    <div id="memorymsg"></div>
+  </div>
+</section>
+
+
+<!-- LEVEL 4 -->
+<section id="level4" class="screen">
+  <div class="card">
+    <h2>LEVEL 4 🎁</h2>
+    <p>Choose a mystery box...</p>
+
+    <div>
+      <span class="box" onclick="box(1)">🎁</span>
+      <span class="box" onclick="box(2)">🎁</span>
+      <span class="box" onclick="box(3)">🎁</span>
+    </div>
+
+    <div id="boxmsg"></div>
+  </div>
+</section>
+
+
+<!-- LEVEL 5 -->
+<section id="level5" class="screen">
+  <div class="card">
+    <h2>LEVEL 5 ❤️</h2>
+    <p>20 little reasons...</p>
+    <p>Choose a number.</p>
+
+    <div id="numbers"></div>
+    <div id="message"></div>
+
+    <button id="continue5" style="display:none" onclick="go('final')">
+      FINAL LEVEL 🔓
+    </button>
+  </div>
+</section>
+
+
+<!-- FINAL -->
+<section id="final" class="screen final">
+  <div class="big">🎂</div>
+
+  <h1>HAPPY 20TH BIRTHDAY</h1>
+  <h1>ROHITH ❤️</h1>
+
+  <div class="card">
+    <p>
+      You have officially unlocked LEVEL 20! 🎮
+    </p>
+
+    <p>
+      Out of all the people in this world,
+      I'm so happy that I got to meet you.
+      ❤️
+    </p>
+
+    <p>
+      This is just the beginning of many more
+      memories, laughs, fights, adventures and
+      beautiful moments together.
+    </p>
+
+    <p>
+      And if I had to choose again,
+      <b>I'd still choose you. ❤️</b>
+    </p>
+
+    <h2>Happy Birthday, my favourite person 🥹❤️</h2>
+
+    <p class="small">
+      More surprises are waiting for you... 🎁
+    </p>
+  </div>
+</section>
+
+
+<script>
+
+function go(id){
+  document.querySelectorAll('.screen')
+    .forEach(x=>x.classList.remove('active'));
+
+  document.getElementById(id).classList.add('active');
+
+  if(id==='level1') startHearts();
+  if(id==='level5') createNumbers();
+}
+
+let hearts=0;
+
+function startHearts(){
+
+  let timer=setInterval(()=>{
+
+    let h=document.createElement('div');
+    h.className='heart';
+    h.innerHTML='❤️';
+
+    h.style.left=Math.random()*90+'%';
+
+    h.onclick=function(){
+      hearts++;
+      document.getElementById('score').innerText=
+      'Hearts: '+hearts+' / 5';
+
+      h.remove();
+
+      if(hearts>=5){
+        clearInterval(timer);
+        setTimeout(()=>go('level2'),700);
+      }
+    };
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>h.remove(),3000);
+
+  },700);
+}
+
+
+function correct(){
+  document.getElementById('quizmsg').innerHTML=
+  '<p>Obviously! 😂❤️<br>Correct answer!</p>';
+
+  setTimeout(()=>go('level3'),1200);
+}
+
+function wrong(){
+  document.getElementById('quizmsg').innerHTML=
+  '<p>Wronggg 😂 Try again!</p>';
+}
+
+
+function memory(){
+  document.getElementById('memorymsg').innerHTML=
+  '<p>Every little moment with you became one of my favourite memories. 🥹❤️</p>';
+
+  setTimeout(()=>go('level4'),1800);
+}
+
+
+function box(n){
+
+  let texts=[
+    'You found a tiny piece of my heart ❤️',
+    'Surprise! You are stuck with me forever 😂❤️',
+    'Almost there... but there is still more! 👀🎁'
+  ];
+
+  document.getElementById('boxmsg').innerHTML=
+  '<p>'+texts[n-1]+'</p>';
+
+  setTimeout(()=>go('level5'),1600);
+}
+
+
+let reasons=[
+'You make me smile without trying. ❤️',
+'You make ordinary days special.',
+'I love the way you care about me.',
+'You are one of my safest places.',
+'You know how to make me laugh.',
+'You are my favourite person to annoy 😂',
+'You have a special place in my heart.',
+'I love our little memories.',
+'You make me feel loved.',
+'I love talking to you.',
+'You understand me in your own way.',
+'You make my life more colourful.',
+'I love your presence.',
+'You are someone I never want to lose.',
+'Our memories mean everything to me.',
+'I love being part of your life.',
+'You make my heart happy.',
+'I love the person you are.',
+'I love the story we are creating.',
+'And simply... I love YOU. ❤️'
+];
+
+function createNumbers(){
+
+  let area=document.getElementById('numbers');
+  area.innerHTML='';
+
+  reasons.forEach((r,i)=>{
+
+    let n=document.createElement('span');
+    n.className='number';
+    n.innerText=i+1;
+
+    n.onclick=function(){
+      document.getElementById('message').innerText=r;
+    };
+
+    area.appendChild(n);
+  });
+
+  document.getElementById('continue5').style.display='block';
+}
+
+</script>
+
+</body>
+</html>
