@@ -4,525 +4,493 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rohith's 20th Birthday ❤️</title>
+<title>Happy 20th Rohith ❤️</title>
 
 <style>
 *{
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
+    min-height:100vh;
     font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#fff0f5,#f5e6ff,#ffe8ef);
-    color:#4a2140;
+    color:#4b2440;
+    background:linear-gradient(135deg,#fff1f6,#f8eaff,#ffeef5);
     text-align:center;
     overflow-x:hidden;
 }
 
-.container{
-    max-width:900px;
-    margin:auto;
-    padding:25px 15px 60px;
+.screen{
+    display:none;
+    min-height:100vh;
+    padding:35px 18px;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.screen.active{
+    display:flex;
+}
+
+.card{
+    width:100%;
+    max-width:520px;
+    background:rgba(255,255,255,.82);
+    padding:28px 20px;
+    border-radius:28px;
+    box-shadow:0 12px 35px rgba(80,30,70,.15);
+    backdrop-filter:blur(8px);
 }
 
 h1{
     font-size:38px;
-    margin:20px 0 5px;
+    margin:10px 0;
 }
 
-.subtitle{
-    font-size:18px;
-    margin-bottom:25px;
+h2{
+    font-size:27px;
 }
 
-.heart{
-    font-size:55px;
-    animation:beat 1s infinite;
-}
-
-@keyframes beat{
-    50%{transform:scale(1.2);}
-}
-
-.card{
-    background:rgba(255,255,255,.75);
-    padding:25px;
-    border-radius:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
-    margin:20px 0;
-}
-
-button{
-    border:none;
-    padding:14px 25px;
-    border-radius:30px;
-    background:#d94f91;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-    margin:8px;
-}
-
-button:hover{
-    transform:scale(1.05);
-}
-
-#message{
-    display:none;
-    font-size:19px;
-    line-height:1.7;
-}
-
-.game{
-    margin-top:20px;
-}
-
-.game button{
-    background:#8d5ca8;
-}
-
-#gameResult{
-    min-height:35px;
-    font-weight:bold;
-}
-
-.gifts{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    margin-top:20px;
-}
-
-.gift{
-    background:white;
-    padding:20px 10px;
-    border-radius:20px;
-    box-shadow:0 6px 18px rgba(0,0,0,.1);
-    cursor:pointer;
-    transition:.3s;
-}
-
-.gift:hover{
-    transform:translateY(-5px) rotate(1deg);
-}
-
-.gift .emoji{
-    font-size:40px;
-}
-
-.giftText{
-    display:none;
-    margin-top:10px;
-    font-size:14px;
-}
-
-.photos{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-
-.photos img{
-    width:100%;
-    height:230px;
-    object-fit:cover;
-    border-radius:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
-}
-
-.final{
-    font-size:22px;
+p{
+    font-size:17px;
     line-height:1.6;
 }
 
-footer{
-    margin-top:30px;
+.small{
     font-size:14px;
     opacity:.7;
 }
 
-@media(max-width:600px){
-    h1{
-        font-size:30px;
-    }
+.heartIcon{
+    font-size:65px;
+    animation:heartbeat 1.3s infinite;
+}
 
-    .gifts{
-        grid-template-columns:repeat(2,1fr);
+@keyframes heartbeat{
+    50%{
+        transform:scale(1.15);
     }
+}
 
-    .photos img{
-        height:180px;
+button{
+    border:none;
+    background:#d94f91;
+    color:white;
+    padding:14px 22px;
+    margin:8px;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow:0 6px 15px rgba(217,79,145,.25);
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+button:active{
+    transform:scale(.96);
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    margin-top:20px;
+}
+
+.options button{
+    width:100%;
+    margin:5px 0;
+    background:#8d5ca8;
+}
+
+.wrong{
+    color:#c94d70;
+    font-weight:bold;
+    min-height:28px;
+}
+
+.correct{
+    color:#b43d7a;
+    font-weight:bold;
+}
+
+.photoBox{
+    margin:20px auto;
+    width:100%;
+    max-width:360px;
+}
+
+.photoBox img{
+    width:100%;
+    max-height:430px;
+    object-fit:cover;
+    border-radius:24px;
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+    animation:photoIn .7s ease;
+}
+
+@keyframes photoIn{
+    from{
+        opacity:0;
+        transform:scale(.85);
     }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.reveal{
+    animation:reveal .8s ease;
+}
+
+@keyframes reveal{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.confetti{
+    position:fixed;
+    top:-20px;
+    font-size:22px;
+    animation:fall 3s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+.final{
+    background:linear-gradient(135deg,#fff0f7,#f0e3ff);
+}
+
+.finalHeart{
+    font-size:70px;
+    animation:heartbeat 1.2s infinite;
+}
+
+.finalMessage{
+    font-size:18px;
+    line-height:1.8;
+}
+
+.signature{
+    font-size:18px;
+    font-weight:bold;
+    margin-top:25px;
+}
+
+.loading{
+    opacity:.7;
 }
 </style>
 </head>
 
+
 <body>
 
-<div class="container">
 
-    <div class="heart">❤️</div>
+<!-- START SCREEN -->
 
-    <h1>Happy 20th Birthday Rohith 🎂</h1>
+<section id="start" class="screen active">
 
-    <p class="subtitle">
-        Welcome to your little birthday world... 💗
+    <div class="heartIcon">❤️</div>
+
+    <p class="small">
+        A LITTLE SOMETHING MADE JUST FOR YOU
     </p>
 
-    <div class="card">
-        <h2>💌 A little message for you</h2>
+    <h1>Hey Rohith...</h1>
 
-        <button onclick="showMessage()">
-            Open your message 💗
+    <p>
+        Someone has prepared a tiny birthday adventure for you. 👀
+    </p>
+
+    <p>
+        But first... let's see how well you remember <b>us</b>. ❤️
+    </p>
+
+    <button onclick="startGame()">
+        START ❤️
+    </button>
+
+</section>
+
+
+
+<!-- QUESTION SCREEN -->
+
+<section id="questionScreen" class="screen">
+
+    <div class="card">
+
+        <p class="small" id="questionNumber">
+            QUESTION 1 OF 5
+        </p>
+
+        <h2 id="question"></h2>
+
+        <div class="options" id="options"></div>
+
+        <p id="result"></p>
+
+    </div>
+
+</section>
+
+
+
+<!-- PHOTO REVEAL SCREEN -->
+
+<section id="photoScreen" class="screen">
+
+    <div class="card reveal">
+
+        <h2 id="photoTitle">
+            You remembered! ❤️
+        </h2>
+
+        <div class="photoBox" id="photoBox">
+            <p class="loading">
+                Loading your memory... ❤️
+            </p>
+        </div>
+
+        <p id="photoCaption"></p>
+
+        <button onclick="nextQuestion()">
+            NEXT ❤️
         </button>
 
-        <div id="message">
-            Happy Birthday to the most special person in my life. 🥹❤️
-            <br><br>
-            You're not just another year older...
-            you're another year more precious to me. 🫶
-            <br><br>
-            I hope this little website makes you smile.
-            Because every little thing here was made with love,
-            just for you. 💕
-            <br><br>
-            <b>Happy 20th Birthday, Rohith! ❤️</b>
-        </div>
     </div>
 
-
-    <!-- MINI GAME -->
-
-    <div class="card game">
-
-        <h2>🎮 Birthday Mini Game</h2>
-
-        <p>Guess which heart is hiding your surprise 👀❤️</p>
-
-        <button onclick="guess(1)">❤️ 1</button>
-        <button onclick="guess(2)">💗 2</button>
-        <button onclick="guess(3)">💖 3</button>
-
-        <p id="gameResult"></p>
-
-    </div>
+</section>
 
 
-    <!-- GIFTS -->
+
+<!-- FINAL SCREEN -->
+
+<section id="finalScreen" class="screen final">
 
     <div class="card">
 
-        <h2>🎁 20 Little Gifts For You</h2>
+        <div class="finalHeart">❤️</div>
 
-        <p>Tap each gift to open it 👀</p>
+        <h1>Happy 20th Birthday</h1>
 
-        <div class="gifts">
+        <h1>Rohith 🎂</h1>
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🎁</div>
-                Gift 1
-                <div class="giftText">
-                    A silver chain — because you deserve something special. ❤️
-                </div>
-            </div>
+        <div class="photoBox" id="finalPhoto">
+        </div>
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🎁</div>
-                Gift 2
-                <div class="giftText">
-                    A wallet — for all the places life takes you. 💕
-                </div>
-            </div>
+        <div class="finalMessage">
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🎁</div>
-                Gift 3
-                <div class="giftText">
-                    A shirt chosen specially for you. 😌❤️
-                </div>
-            </div>
+            <p>
+                You passed all 5 questions. 🥹❤️
+            </p>
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🎁</div>
-                Gift 4
-                <div class="giftText">
-                    A cute couple bike toy — a tiny symbol of us. 🥹
-                </div>
-            </div>
+            <p>
+                But honestly, these questions were never really
+                about getting the answers right.
+            </p>
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🌹</div>
-                Gift 5
-                <div class="giftText">
-                    A crochet rose — My love for you will never fade. 🌹❤️
-                </div>
-            </div>
+            <p>
+                They were about all the little moments,
+                memories and feelings that made <b>us</b>.
+            </p>
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🪮</div>
-                Gift 6
-                <div class="giftText">
-                    A wooden comb — little things, big love. 🫶
-                </div>
-            </div>
+            <p>
+                From the day you proposed,
+                to the day I said yes,
+                to every laugh, fight, memory and moment
+                we've shared...
+            </p>
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">👔</div>
-                Gift 7
-                <div class="giftText">
-                    A belt — because obviously you need one more thing from me 😂❤️
-                </div>
-            </div>
+            <p>
+                I'm grateful that our story is ours. ❤️
+            </p>
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">☀️</div>
-                Gift 8
-                <div class="giftText">
-                    Purple sunscreen — take care of yourself! 💜
-                </div>
-            </div>
+            <p>
+                On your 20th birthday,
+                I just want you to know one thing:
+            </p>
 
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">💞</div>
-                Gift 9
-                <div class="giftText">
-                    Couple bracelet — something that connects us. 🫶
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🌸</div>
-                Gift 10
-                <div class="giftText">
-                    A little surprise chosen with love. 💗
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🍫</div>
-                Gift 11
-                <div class="giftText">
-                    Something sweet for someone sweeter. 😌
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">💌</div>
-                Gift 12
-                <div class="giftText">
-                    A tiny handwritten memory from me to you. ❤️
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">📸</div>
-                Gift 13
-                <div class="giftText">
-                    Our memories are my favourite gift. 🥹
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🎵</div>
-                Gift 14
-                <div class="giftText">
-                    A song that reminds me of you. 🎶❤️
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🧸</div>
-                Gift 15
-                <div class="giftText">
-                    A tiny cute surprise because you're my favourite person. 🥺
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🍬</div>
-                Gift 16
-                <div class="giftText">
-                    A little sweet treat for your birthday. 💕
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">📖</div>
-                Gift 17
-                <div class="giftText">
-                    A memory we can look back on someday. ❤️
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">✨</div>
-                Gift 18
-                <div class="giftText">
-                    One wish from me: stay happy always. 🫶
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">💝</div>
-                Gift 19
-                <div class="giftText">
-                    My love — which doesn't come with an expiry date. ❤️
-                </div>
-            </div>
-
-            <div class="gift" onclick="openGift(this)">
-                <div class="emoji">🎂</div>
-                Gift 20
-                <div class="giftText">
-                    The biggest gift: another year of memories together. 🥹❤️
-                </div>
-            </div>
+            <p>
+                <b>
+                After everything,
+                I'd still choose us.
+                Always. ❤️
+                </b>
+            </p>
 
         </div>
-    </div>
 
-
-    <!-- PHOTOS -->
-
-    <div class="card">
-
-        <h2>📸 Our Memories</h2>
-
-        <p>Your special moments 💗</p>
-
-        <div id="photos" class="photos">
-            <p>Loading memories... ❤️</p>
+        <div class="signature">
+            Happy Birthday, my favourite person. 🥹❤️
+            <br><br>
+            — Rakshana
         </div>
 
     </div>
 
+</section>
 
-    <!-- FINAL MESSAGE -->
-
-    <div class="card final">
-
-        <h2>❤️ One Last Thing...</h2>
-
-        <p>
-            No matter how many gifts I give you,
-            none of them can compare to how much you mean to me.
-        </p>
-
-        <p>
-            Happy 20th Birthday, Rohith. 🥹❤️
-            <br>
-            Here's to many more birthdays,
-            memories and adventures together. 🫶
-        </p>
-
-        <b>— With all my love, Rakshana ❤️</b>
-
-    </div>
-
-    <footer>
-        Made with ❤️ specially for Rohith
-    </footer>
-
-</div>
 
 
 <script>
 
-function showMessage(){
-    document.getElementById("message").style.display="block";
+
+/* =========================
+   QUESTIONS
+========================= */
+
+const questions = [
+
+    {
+        question:
+        "When did our relationship officially start? ❤️",
+
+        options:[
+            "November 28, 2024",
+            "December 28, 2024",
+            "December 5, 2024",
+            "January 1, 2025"
+        ],
+
+        correct:1,
+
+        caption:
+        "The day our story officially became ours. ❤️"
+    },
+
+
+    {
+        question:
+        "Who proposed first in our story? 💌",
+
+        options:[
+            "Rakshana",
+            "Rohith ❤️",
+            "Both together",
+            "It just happened naturally 😂"
+        ],
+
+        correct:1,
+
+        caption:
+        "The beginning of everything... 🥹❤️"
+    },
+
+
+    {
+        question:
+        "When did she say YES to Rohith? 🥹",
+
+        options:[
+            "November 28, 2024",
+            "December 28, 2024 ❤️",
+            "December 5, 2024",
+            "January 1, 2025"
+        ],
+
+        correct:1,
+
+        caption:
+        "And that YES became one of the most special days of our story. ❤️"
+    },
+
+
+    {
+        question:
+        "Who made the first move in our love story? 👀",
+
+        options:[
+            "Rohith ❤️",
+            "Rakshana",
+            "Both",
+            "Fate 😂"
+        ],
+
+        correct:0,
+
+        caption:
+        "And look where that first move brought us. 🥹❤️"
+    },
+
+
+    {
+        question:
+        "After everything we've been through, who would you still choose? ❤️",
+
+        options:[
+            "You ❤️",
+            "Rohith ❤️",
+            "Both of us 🫶",
+            "Always us ❤️"
+        ],
+
+        correct:3,
+
+        caption:
+        "Always us. No matter what. ❤️"
+    }
+
+];
+
+
+let currentQuestion = 0;
+
+let photos = [];
+
+let currentPhotoIndex = 0;
+
+
+
+/* =========================
+   SCREEN CONTROL
+========================= */
+
+function showScreen(id){
+
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
 
-function openGift(gift){
 
-    let text = gift.querySelector(".giftText");
+/* =========================
+   START GAME
+========================= */
 
-    if(text.style.display === "block"){
-        text.style.display = "none";
-    }
-    else{
-        text.style.display = "block";
-    }
-}
+function startGame(){
 
+    currentQuestion = 0;
 
-let luckyNumber = Math.floor(Math.random()*3)+1;
-
-function guess(number){
-
-    let result = document.getElementById("gameResult");
-
-    if(number === luckyNumber){
-
-        result.innerHTML =
-        "🎉 YOU FOUND IT! 🥹❤️ You unlocked the birthday surprise!";
-
-    }else{
-
-        result.innerHTML =
-        "Awww not this one 😭 Try again! ❤️";
-
-    }
-}
-
-
-/* AUTOMATICALLY LOAD IMAGES FROM THIS GITHUB REPOSITORY */
-
-async function loadPhotos(){
-
-    const username = "rakshana-hue";
-    const repo = "Rohith-20th-birthday";
-
-    const photosDiv = document.getElementById("photos");
-
-    try{
-
-        const response = await fetch(
-            `https://api.github.com/repos/${username}/${repo}/contents/`
-        );
-
-        const files = await response.json();
-
-        const images = files.filter(file =>
-            file.type === "file" &&
-            /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)
-        );
-
-        photosDiv.innerHTML = "";
-
-        if(images.length === 0){
-
-            photosDiv.innerHTML =
-            "<p>No photos found yet ❤️</p>";
-
-            return;
-        }
-
-        images.forEach(file => {
-
-            const img = document.createElement("img");
-
-            img.src =
-            `https://raw.githubusercontent.com/${username}/${repo}/main/${encodeURIComponent(file.name)}`;
-
-            img.alt = "Our memory ❤️";
-
-            photosDiv.appendChild(img);
-
-        });
-
-    }catch(error){
-
-        photosDiv.innerHTML =
-        "<p>Photos couldn't load right now ❤️</p>";
-
-    }
-}
-
-loadPhotos();
-
-</script>
-
-</body>
-</html>
+    load
